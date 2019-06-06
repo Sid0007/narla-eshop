@@ -30,7 +30,7 @@ export default function SideCart() {
               })}
             </ul>
             <h4 className="text-capitalize text-main">
-              cart total : ${cartTotal}
+              cart total : £{cartTotal}
             </h4>
             <div className="text-center my-5">
               <Link to="/cart" className="main-link">
