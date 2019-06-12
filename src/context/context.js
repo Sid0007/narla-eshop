@@ -1,7 +1,8 @@
 import React, { Component } from "react";
 import { linkData } from "./linkData";
 import { socialData } from "./socialData";
-import { items } from "./productData";
+//import { items } from "./productData";
+import { client } from "./contentful";
 const ProductContext = React.createContext();
 //Provider
 //Consumer
@@ -31,7 +32,13 @@ class ProductProvider extends Component {
 
   componentDidMount() {
     //from contentful items
-    this.setProducts(items);
+    // this.setProducts(items);
+    client
+      .getEntries({
+        content_type: "techStoreProducts"
+      })
+      .then(response => this.setProducts(response.items))
+      .catch(console.error);
   }
 
   setProducts = products => {
@@ -273,10 +280,13 @@ class ProductProvider extends Component {
       tempProducts = tempProducts.filter(item => item.freeShipping === true);
     }
     if (search.length > 0) {
-      tempProducts = tempProducts.filter(item =>{
+      tempProducts = tempProducts.filter(item => {
         let tempSearch = search.toLowerCase();
+        //not using
         let tempTitle = item.title.toLowerCase().slice(0, search.length);
-        if (tempSearch === tempTitle) {
+        
+        console.log(tempTitle.indexOf(tempSearch));
+        if (item.title.toLowerCase().indexOf(tempSearch) > 1 ) {
           return item;
         }
       });
