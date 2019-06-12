@@ -41,7 +41,7 @@ export default function SingleProductPage() {
                       company : {company}
                     </h5>
                     <h5 className="text-main text-capitalize mb-4">
-                      price : ${price}
+                      price : £{price}
                     </h5>
                     <p className="text-capitalize text-title mt-3">
                       some info about product :
